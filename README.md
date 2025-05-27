@@ -1,5 +1,4 @@
 # FJSX24-Backendutveckling-Vecka22
-Enhetstester med Jest, Skydd/säkerhet mot SQL injektioner
+Enhetstester med Jest
 
-- Jest,
-- Skydd mot SQL-injektioner, kryptering, hantering av miljövariabler.
+- Jest
