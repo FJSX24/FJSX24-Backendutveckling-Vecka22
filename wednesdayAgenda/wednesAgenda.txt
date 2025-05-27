@@ -1,0 +1,274 @@
+🧭 Workshop – 🚀 Onsdag v22: Enhetstester med Jest
+📅 Datum: 2025-05-28
+🕘 Tid: 09.00–12.00
+🎯 Tema: Enhetstester med Jest (inkl. async, API, mocking)
+🔬 Mål: Introduktion, praktisk testning, mentimeter + tydlig progression i svårighetsgrad
+
+-----------------------------
+🎯 Syfte:
+
+Efter lektionen ska studenterna:
+Förstå syftet med enhetstestning i backend.
+
+Kunna skriva och köra tester med Jest (inkl. async och API).
+
+Kunna testa Express-endpoints med Supertest.
+
+Förstå grunderna i mocking (jest.fn).
+
+-----------------------------
+📝 Tidsplanering (5 timmar)
+
+| Tid         | Moment                               | Innehåll                                                                       |
+| ----------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| 09.00–09.15 | 📊 Mentimeter                        | Veckans Menti.                                                                 |
+| 09.15–09.35 | 📚 PowerPoint & teori (20 min)       | Vad är ett enhetstest? Varför testar vi? introduce describe/it/expect()        |
+| 09.35–10.20 | 💻 Code-Along 1: setup + sync tester | `add(a, b), isEmailValid() – teststruktur & matchers.                          |
+| 10.20–10.30 | ☕ Kort paus                         | Reflektion i smågrupp: “Varför testa små funktioner separat?”                  |
+| 10.30–11.00 | 💻 Code-Along 2: async + Supertest   | `fetchUser()` + test på `GET /api/users` med `supertest`                       |
+| 11.00–11.30 | 💥 Code-Along 3: Mocking & isolering | Skapa `db.js` → `jest.fn()` → kontrollera att funktionen anropas               |
+🧪 Bonusmoment: Testtäckning	npx jest --coverage – analysera täckningsrapporter
+| 11.30–12.00 | 🧪 Självständig övning (3 nivåer)    | Uppgifter utifrån egna kod eller medföljande mall                              |
+
+
+-----------------------------
+🧑‍🏫 PowerPoint – Innehåll & Talarmanus:
+
+🟦 1. Vad är ett enhetstest?
+
+🗣️ "Ett enhetstest testar en specifik funktion i isolering – utan att köra resten av applikationen. Till exempel: om du har en add(a, b)-funktion, så testar du bara att den returnerar rätt värde – oavsett hur resten av appen ser ut."
+
+🧠 Poängen: Du vill veta: "Funkar den här lilla byggstenen som den ska – helt på egen hand?"
+
+-----------------------------
+🟦 2. Varför testa?
+
+🗣️ "Det finns tre stora anledningar till att vi skriver tester:"
+
+✅ Fångar buggar tidigt – särskilt när du refaktorerar eller ändrar kod.
+
+🧾 Dokumentation – dina tester visar vad koden förväntas göra.
+
+🔄 Förtroende vid förändring – du kan ändra utan att vara rädd att något går sönder.
+
+-----------------------------
+🟦 3. Jest: Struktur & begrepp
+🗂️ Ett grundläggande test ser ut så här:
+describe("funktionen add", () => {
+  it("ska returnera summan av två tal", () => {
+    expect(add(2, 3)).toBe(5);
+  });
+});
+
+🛠️ Funktioner i Jest:
+
+Funktion  -  Beskrivning
+describe()	-  En grupp av tester, ex. "Alla tester för funktionen add"
+it() eller test()	-  Själva testet – formuleras som ett krav
+expect()	-  Gör ett påstående om vad funktionen ska returnera
+
+🎯 Matchers:
+.toBe() – exakt lika med (===)
+
+.toEqual() – fungerar för objekt/arrayer
+
+.toContain() – innehåller i array eller sträng
+
+🗣️ *"Tänk så här: expect(result).toBe(expected) = Jag förväntar mig att resultatet ska vara exakt det här."
+-----------------------------
+🟦 4. Testa async kod
+Du kan testa async funktioner på tre sätt:
+
+// 1. Med async/await
+it("returnerar data", async () => {
+  const data = await fetchData();
+  expect(data).toBeDefined();
+});
+
+// 2. Med return
+it("fungerar med promises", () => {
+  return fetchData().then(data => expect(data).toBeDefined());
+});
+
+// 3. Med done (mest för callbacks)
+it("med done()", done => {
+  fetchData(data => {
+    expect(data).toBeDefined();
+    done();
+  });
+});
+
+🗣️ "Viktigt här: Testet måste veta när det är klart – annars avslutas det innan resultatet är tillbaka."
+
+-----------------------------
+🟦 5. Supertest
+
+🗣️ "Supertest är ett Jest-kompatibelt bibliotek för att testa API-routes i Express. Det fungerar precis som Postman – men direkt i kod."
+
+Exempel:
+import request from "supertest";
+import app from "../server.js";
+
+it("GET /api/users returnerar 200", async () => {
+  const res = await request(app).get("/api/users");
+  expect(res.statusCode).toBe(200);
+});
+
+"Testar API-endpoints precis som en frontend-anropare skulle göra."
+-----------------------------
+🟦 6. Mocking – varför?
+
+🗣️ "Mocking innebär att ersätta t.ex. en databasfunktion med en falsk funktion – jest.fn() – så att du kan kontrollera vad som händer utan att behöva ringa riktiga API:er eller databaser."
+
+const getUsers = jest.fn().mockReturnValue([{ name: "Anna" }]);
+
+"Du vill låtsas att databasen ger ett visst svar – så du kan testa din logik oberoende av DB:n."
+"Du kontrollerar flödet och isolerar logik – därför kan du testa snabbare och säkrare."
+
+-----------------------------
+-----------------------------
+-----------------------------
+💻 Code-Along: Enhetstestning i backend med Jest
+
+📦 Installation:
+npm init -y
+npm install supertest express jest
+
+📌 Lägg till i package.json:
+"scripts": {
+  "test": "jest",
+  "test:watch": "jest --watch"
+}
+
+-----------------------------
+🗃️ Struktur:
+projekt/
+├── src/
+│   ├── math.js              # enklare sync-funktioner (t.ex. add())
+│   ├── users.js             # async-funktioner, t.ex. fetchUser()
+│   └── db.js                # vår databasfunktion (ska mockas)
+│   └── service.js           # använder db.js
+├── __tests__/               # alla tester
+│   ├── math.test.js         # tester för math.js
+│   ├── users.test.js        # tester för users.js
+│   └── service.test.js
+│   ├── api.test.js          # tester för Express API i server.js
+├── server.js                # Express-app (för Supertest-övningar)
+├── package.json
+
+-----------------------------
+🛠️ 2. Sync test – src/math.js
+
+src/math.js
+genomför den koden
+
+__tests__/math.test.js
+genomför den koden
+
+🧪 Kör testet:
+npm test
+
+-----------------------------
+🔁 3. Testa async funktion
+
+📄 src/users.js
+genomför den koden
+
+📄 __tests__/users.test.js
+genomför den koden
+
+🧪 Kör testet:
+npm test
+ELLER:
+npm run test:watch
+
+-----------------------------
+🌐 4. API-test med Supertest
+
+Skapa en enkel Express-app server.js:
+genomför den koden
+
+Test i __tests__/api.test.js:
+genomför den koden
+
+🧪 Kör testet:
+npm test
+ELLER:
+npm run test:watch
+
+-----------------------------
+🌐 5. Mocking med jest.fn()
+
+📦 Syfte: Testa en funktion som använder en databasfunktion, utan att faktiskt behöva köra riktig databaslogik.
+
+📄 src/db.js
+Denna funktion ska vi mocka i testet.
+
+genomför den koden
+
+📄 src/service.js
+Den funktion vi ska testa, som internt använder databasen.
+
+genomför den koden
+
+📄 __tests__/service.test.js
+Här mockar vi getUsersFromDb och testar getUserNames.
+
+genomför den koden
+
+🧪 Kör testet:
+npm test
+ELLER:
+npm run test:watch
+
+-----------------------------
+🔁 Bonusmoment – Testtäckning med Jest
+
+📦 Mål: Analysera hur stor del av projektets kod som faktiskt testas
+
+npx jest --coverage
+
+📊 Ger rapport som visar:
+
+Vilka filer testas
+
+Hur stor procentuell andel av kod, rader och grenar täcks
+
+Vilken kod som inte körs av dina tester
+
+🗣️ Talarmanus:
+“Testtäckning är ett sätt att se vilka delar av koden som faktiskt används av dina tester. Det visar svagheter i testningen och vad som riskerar att gå sönder vid ändringar.”
+
+
+📦 Syfte: Se hur mycket av koden som faktiskt testas.
+
+📄 Vad händer?
+
+Du får en rapport som visar:
+% av koden som testas (statements, functions, lines, branches)
+
+Vilka rader i filerna som inte är testade
+
+🧠 Exempel på rad som inte testas:
+if (process.env.NODE_ENV !== "test") {
+  app.listen(3000, () => console.log("Server igång"));
+}
+
+🗣️ Talarmanus:
+
+"Här ser vi att vår server.js inte har 100% täckning – ofta för att vi har kod som bara körs i produktion eller är svår att testa. Det är okej – men det är bra att veta!"
+-----------------------------
+-----------------------------
+-----------------------------
+🧠 Reflektionsfrågor
+
+Vad gör ett test bra?
+
+Är det alltid värt att mocka?
+
+Hur kan du börja skriva tester i ditt Chas Challenge-projekt?
+
+-----------------------------
+-----------------------------
+-----------------------------
+Dags för övningar

@@ -1,0 +1,77 @@
+🧪 Självständiga övningar – Enhetstestning med Jest
+
+🎯 Mål:
+Träna på att skriva och strukturera tester i Jest
+
+Testa synkrona och asynkrona funktioner
+
+Använda supertest för API-routes
+
+Isolera logik genom mocking med jest.fn()
+
+🟢 Lätt nivå
+
+1. Testa funktionen subtract(a, b):
+
+    - Skapa en ny funktion i src/mathExtra.js
+
+    - Skriv ett test i __tests__/mathExtra.test.js:
+
+    - Kontrollera att subtract(5, 3) returnerar 2
+
+-------------------
+2. Testa capitalize():
+
+    - Funktion: capitalize("hej") → "Hej"
+
+    - Testa både små bokstäver och tom sträng
+
+-------------------
+-------------------
+-------------------
+🟠 Medel nivå – Async & API
+
+1. Testa asynkron funktion getWeather(city):
+
+    - Simulera async retur: { city: "Stockholm", temp: 15 }
+
+    - Testa med async/await och expect(...).toEqual(...)
+
+-------------------
+2. Skapa egen route och testa:
+
+    - Skapa en route i server.js: GET /api/ping → returnerar { pong: true }
+
+    - Skriv ett Supertest-test:
+
+        - Kontrollera att statuskoden är 200
+
+        - Kontrollera att svaret innehåller { pong: true }
+
+-------------------
+-------------------
+-------------------
+🔴 Svår nivå – Mocking & isolering
+
+1. Mocka en databasfunktion:
+
+    - I src/database.js: exportera en funktion getProducts()
+
+    - I src/shopService.js: använd getProducts() och returnera bara namn på produkter
+
+    - I __tests__/shopService.test.js:
+
+        - Mocka getProducts() med jest.spyOn(...)
+
+        - Kontrollera att shopService.getProductNames() returnerar t.ex. ["TV", "Radio"]
+
+        - Verifiera att funktionen anropats med toHaveBeenCalled()
+
+-------------------
+2. Täckning och felhantering:
+
+    - Skapa en funktion som kastar fel om input är null
+
+    - Testa att fel kastas med .toThrow()
+
+    - Kör npx jest --coverage och kontrollera att filen är 100% täckt
