@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1748426570828" clover="3.2.0">
+  <project timestamp="1748426570828" name="All files">
+    <metrics statements="19" coveredstatements="16" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="5" elements="29" coveredelements="22" complexity="0" loc="19" ncloc="19" packages="2" files="5" classes="5"/>
+    <package name="wednesdayAgenda">
+      <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <file name="serverCA.js" path="C:\Mandus\Chas Academy\FJSX24\BACKENDUTVECKLING 60yhp\FJSX24-Backendutveckling-Vecka22\wednesdayAgenda\serverCA.js">
+        <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="wednesdayAgenda.srcCA">
+      <metrics statements="11" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
+      <file name="dbCA.js" path="C:\Mandus\Chas Academy\FJSX24\BACKENDUTVECKLING 60yhp\FJSX24-Backendutveckling-Vecka22\wednesdayAgenda\srcCA\dbCA.js">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+      <file name="mathCA.js" path="C:\Mandus\Chas Academy\FJSX24\BACKENDUTVECKLING 60yhp\FJSX24-Backendutveckling-Vecka22\wednesdayAgenda\srcCA\mathCA.js">
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="serviceCA.js" path="C:\Mandus\Chas Academy\FJSX24\BACKENDUTVECKLING 60yhp\FJSX24-Backendutveckling-Vecka22\wednesdayAgenda\srcCA\serviceCA.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="usersCA.js" path="C:\Mandus\Chas Academy\FJSX24\BACKENDUTVECKLING 60yhp\FJSX24-Backendutveckling-Vecka22\wednesdayAgenda\srcCA\usersCA.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
